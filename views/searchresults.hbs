@@ -1,0 +1,30 @@
+<div class="row">
+<div class="columns">
+    <div class="column is-6 is-offset-3">
+        <div class="card">
+            <div class="card-content">
+                <table class="table" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Courses</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{data.id}}</td>
+                            <td>{{data.fname}}</td>
+                            <td>
+                                {{#each data.courses}}
+                                    {{name}};
+                                {{/each}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

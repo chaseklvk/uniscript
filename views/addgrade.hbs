@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="column is-half is-offset-one-quarter has-text-centered">
+      <h1 class="title">Add Grade</h1>
+    </div>
+  </div>
+  <div class="column is-half is-offset-one-quarter">
+    <div class="card">
+      <div class="card-content">
+        <form action="/addgrade" method="POST">
+          <input type="hidden" name="_csrf" value="{{csrfToken}}">
+          <input type="hidden" name="_id" value="{{studentId}}">
+          <div class="field">
+            <label class="label">Grade</label>
+            <div class="control">
+              <input name="grade" class="input" type="text">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Course: </label>
+            <div class="select">
+              <select required name="course_id">
+                {{#each courses}}
+                  <option value="{{name}}">{{name}}</option>
+                {{/each}}
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <p class="control">
+              <button type="submit" class="button is-success">
+                  Add Grade
+              </button>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

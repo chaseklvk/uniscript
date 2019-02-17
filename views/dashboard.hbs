@@ -1,0 +1,85 @@
+<div class="row">
+<div class="columns">
+    <div class="column is-5 is-offset-1">
+        <div class="card">
+        <div class="card-content">
+            <form action="/search" method="POST">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+            <div class="field">
+                <label class="label">Search for student by ID:</label>
+                <div class="control">
+                <input name="searchId" class="input" type="text">
+                </div>
+            </div>
+            <div class="field">
+                <p class="control">
+                <button class="button is-success">
+                    Search
+                </button>
+                </p>
+            </div>
+            </form>
+        </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <table class="table" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Class ID</th>
+                            <th>Class Name</th>
+                            <th>Number of Units</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each courses}}
+                            <tr>
+                                <td>{{_id}}</td>
+                                <td>{{name}}</td>
+                                <td>{{units}}</td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+
+                <a href="/addcourse" class="button is-success">Add Course</a>
+            </div>
+        </div>
+    </div>
+    <div class="column is-5">
+        <div class="card">
+            <div class="card-content">
+                <table class="table" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Courses</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each students}}
+                        <tr>
+                            <td>{{_id}}</td>
+                            <td>{{name}}</td>
+                            <td>
+                                {{#each courses}}
+                                    {{name}};
+                                {{/each}}
+                            </td>
+                            <td>
+                                <a href="/grade?id={{_id}}">Add Grade</a><br />
+                                <a href="/publish?id={{_id}}">Publish to Blockchain</a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+
+                <a href="/addstudent" class="button is-success">Add Student</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

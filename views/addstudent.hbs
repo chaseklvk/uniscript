@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="column is-half is-offset-one-quarter has-text-centered">
+      <h1 class="title">Add Student</h1>
+    </div>
+  </div>
+  <div class="column is-half is-offset-one-quarter">
+    <div class="card">
+      <div class="card-content">
+        <form action="/addstudent" method="POST">
+          <input type="hidden" name="_csrf" value="{{csrfToken}}">
+          <div class="field">
+            <label class="label">Student Name</label>
+            <div class="control">
+              <input name="name" class="input" type="text">
+            </div>
+          </div>
+          
+          {{#each courses}}
+            <label class="checkbox">
+                <input type="checkbox" name="{{_id}}">
+                {{name}}
+            </label>
+          {{/each}}
+          <div class="field" style="margin-top:10px;">
+            <p class="control">
+              <button type="submit" class="button is-success">
+                  Add Student
+              </button>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

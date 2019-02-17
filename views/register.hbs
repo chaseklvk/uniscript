@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="column is-half is-offset-one-quarter has-text-centered">
+      <h1 class="title">Register</h1>
+    </div>
+  </div>
+  <div class="column is-half is-offset-one-quarter">
+    <div class="card">
+      <div class="card-content">
+        <form action="/register" method="POST">
+          <input type="hidden" name="_csrf" value="{{csrfToken}}">
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+              <input name="email" class="input" type="email">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Username</label>
+            <div class="control">
+              <input name="username" class="input" type="text">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input name="password" class="input" type="password">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Confirm Password</label>
+            <div class="control">
+              <input name="password_confirm" class="input" type="password">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">University: </label>
+            <div class="select">
+              <select required name="univ_id">
+                {{#each universities}}
+                  <option value="{{_id}}">{{name}}</option>
+                {{/each}}
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <p class="control">
+              <button type="submit" class="button is-success">
+                  Register
+              </button>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

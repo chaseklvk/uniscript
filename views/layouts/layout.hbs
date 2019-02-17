@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles/main.css">
+  </head>
+  <body>
+     <nav class="navbar is-white">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item brand-text" style="font-weight:bolder;" href="/">Uniscript</a>
+                <div class="navbar-burger burger" data-target="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div id="navMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    {{#if user}}
+                        <a class="navbar-item" href="/dashboard">{{username}}</a>
+                        <a class="navbar-item" href="/logout">Logout</a>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- END NAV -->
+    <div class="section">
+        {{{body}}}
+    </div>
+  </body>
+</html>

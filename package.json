@@ -1,0 +1,27 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "Express web app for blockathon",
+  "main": "index.js",
+  "private": 1,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-styles": "sass ./styles/main.scss ./public/styles/main.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bcrypt": "^3.0.4",
+    "body-parser": "^1.18.3",
+    "bulma": "^0.7.4",
+    "cookie-parser": "^1.4.4",
+    "csurf": "^1.9.0",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.4.13",
+    "uuid": "^3.3.2"
+  }
+}

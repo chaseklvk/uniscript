@@ -1,0 +1,47 @@
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        {{ title }}
+      </h1>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Container Name</th>
+          <th>Container ID</th>
+          <th>Container Port</th>
+          <th>Container State</th>
+          <th>Container Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#if containers}}
+          {{#each containers}}
+            <tr>
+              <td>{{this.name}}</td>
+              <td><abbr title="{{this.id}}">{{this.shortId}}...</abbr></td>
+              <td>{{this.port}}</td>
+              <td>{{this.state}}</td>
+              <td>{{this.status}}</td>
+              {{#if this.isRunning}}
+                <td><a class="button is-warning" href="/stopContainer/{{this.id}}">Stop Container</a></td>
+              {{else}}
+                <td><a class="button is-danger" href="/deleteContainer/{{this.id}}">Delete Container</a></td>
+              {{/if}}
+            </tr>
+          {{/each}}
+        {{else}}
+          <tr>
+            <td colspan="6">No Active Containers</td>
+          </tr>
+        {{/if}}
+      </tbody>
+    </table>
+  </div>
+</section>
