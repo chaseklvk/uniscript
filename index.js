@@ -3,17 +3,17 @@ const app = express();
 
 const bodyParser = require('body-parser');
 const axios = require('axios');
-const uuid = require('uuid');
 const hbs = require('express-handlebars');
 const path = require('path');
 const csrf = require('csurf');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
+const flash = require('connect-flash');
 const session = require('express-session');
 
 // Connect to DBs
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://uniscript_admin:uniscript_admin123@ds163014.mlab.com:63014/uniscript', {
+mongoose.connect(process.env.DB_URI, {
     useNewUrlParser: true,
 });
 
@@ -45,6 +45,15 @@ app.use(session({
     saveUninitialized: true,
     resave: true
 }));
+
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  res.locals.user = req.user || null;
+  next();
+});
 
 // Custom Middleware
 const requiresLogin = (req, res, next) => {
@@ -297,7 +306,7 @@ app.post('/search', requiresLogin, (req, res) => {
 
     const { searchId } = req.body;
 
-    axios.post('https://B822AB2B2D174C49BF6297061964EC6D.blockchain.ocp.oraclecloud.com:443/restproxy1/bcsgw/rest/v1/transaction/invocation', {
+    axios.post(process.env.ORACLE_API_URL, {
         channel: "default",
         chaincode: "uniscript",
         method: "readStudent",
@@ -311,8 +320,10 @@ app.post('/search', requiresLogin, (req, res) => {
     .then(function (response) {
         const payload = JSON.parse(response.data.result.payload);
 
-        res.render('searchresults', { layout: 'layout', data: payload, user: req.session.userId,
-        username: req.session.username })
+        Student.findOne({ _id: payload.id }).populate('grades').exec((err, data) => {
+            res.render('searchresults', { layout: 'layout', data: data, user: req.session.userId,
+            username: req.session.username })
+        });
     })
     .catch(function (error) {
         console.log(error);
@@ -322,7 +333,7 @@ app.post('/search', requiresLogin, (req, res) => {
 app.get('/publish', requiresLogin, (req, res) => {
 
     Student.findOne({ _id: req.query.id }).exec((err, data) => {
-        axios.post('https://B822AB2B2D174C49BF6297061964EC6D.blockchain.ocp.oraclecloud.com:443/restproxy1/bcsgw/rest/v1/transaction/invocation', {
+        axios.post(process.env.ORACLE_API_URL, {
             channel: "default",
             chaincode: "uniscript",
             method: "initStudent",
@@ -335,6 +346,7 @@ app.get('/publish', requiresLogin, (req, res) => {
             }
         })
         .then(function (response) {
+            req.flash('success_msg', 'Student published to the blockchain!');
             res.redirect('/dashboard');
         })
         .catch(function (error) {

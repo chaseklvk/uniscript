@@ -47,6 +47,11 @@
         </div>
     </div>
     <div class="column is-5">
+        {{#if success_msg}}
+            <div class="notification is-success">
+                {{success_msg}}
+            </div>
+        {{/if}}
         <div class="card">
             <div class="card-content">
                 <table class="table" style="width: 100%;">

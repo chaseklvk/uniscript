@@ -13,11 +13,11 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{data.id}}</td>
-                            <td>{{data.fname}}</td>
+                            <td>{{data._id}}</td>
+                            <td>{{data.name}}</td>
                             <td>
-                                {{#each data.courses}}
-                                    {{name}};
+                                {{#each data.grades}}
+                                    {{course}} ({{score}});
                                 {{/each}}
                             </td>
                         </tr>
